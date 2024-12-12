@@ -15,6 +15,10 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    // Define user types as constants
+    public const TYPE_ADMIN = 'admin';
+    public const TYPE_USER = 'user';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -47,5 +51,37 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public static function getUserTypes(): array {
+        return [
+            self::TYPE_ADMIN,
+            self::TYPE_USER,
+        ];
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->user_type === self::TYPE_ADMIN;
+    }
+
+    public function isUser(): bool
+    {
+        return $this->user_type === self::TYPE_USER;
+    }
+
+    public function companies()
+    {
+        return $this->hasMany(Company::class, 'owner_id');
+    }
+
+    public function jobRoles()
+    {
+        return $this->belongsToMany(JobRole::class, 'user_job_roles');
+    }
+
+    public function employeeCompanies()
+    {
+        return $this->belongsToMany(Company::class, 'employees', 'user_id', 'company_id');
     }
 }
