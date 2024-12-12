@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[ApiResource]
+#[ApiResource(
+    paginationItemsPerPage: 10,
+)]
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -74,11 +76,6 @@ class User extends Authenticatable
     public function companies()
     {
         return $this->hasMany(Company::class, 'owner_id');
-    }
-
-    public function jobRoles()
-    {
-        return $this->belongsToMany(JobRole::class, 'user_job_roles');
     }
 
     public function employeeCompanies()
