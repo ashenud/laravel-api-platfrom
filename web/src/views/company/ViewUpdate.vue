@@ -7,5 +7,5 @@
 </template>
 
 <script setup lang="ts">
-import Update from "@/components/book/BookUpdate.vue";
+import Update from "@/components/company/CompanyUpdate.vue";
 </script>

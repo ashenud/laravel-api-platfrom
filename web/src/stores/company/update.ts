@@ -1,14 +1,14 @@
 import { defineStore } from "pinia";
 import api from "@/utils/api";
 import { extractHubURL } from "@/utils/mercure";
-import type { Book } from "@/types/company";
+import type { Company } from "@/types/company";
 import type { UpdateState } from "@/types/stores";
 import type { SubmissionErrors } from "@/types/error";
 import { SubmissionError } from "@/utils/error";
 
-interface State extends UpdateState<Book> {}
+interface State extends UpdateState<Company> {}
 
-export const useBookUpdateStore = defineStore("bookUpdate", {
+export const useCompanyUpdateStore = defineStore("companyUpdate", {
   state: (): State => ({
     updated: undefined,
     retrieved: undefined,
@@ -25,7 +25,7 @@ export const useBookUpdateStore = defineStore("bookUpdate", {
 
       try {
         const response = await api(id);
-        const data: Book = await response.json();
+        const data: Company = await response.json();
         const hubUrl = extractHubURL(response);
 
         this.toggleLoading();
@@ -43,22 +43,22 @@ export const useBookUpdateStore = defineStore("bookUpdate", {
       }
     },
 
-    async update(payload: Book) {
+    async update(payload: Company) {
       this.setError("");
       this.toggleLoading();
 
       if (!this.retrieved?.["@id"]) {
-        this.setError("No book found. Please reload");
+        this.setError("No company found. Please reload");
         return;
       }
 
       try {
         const response = await api(this.retrieved["@id"], {
-          method: "PUT",
-          headers: new Headers({ "Content-Type": "application/ld+json" }),
+          method: "PATCH",
+          headers: new Headers({ "Content-Type": "application/merge-patch+json" }),
           body: JSON.stringify(payload),
         });
-        const data: Book = await response.json();
+        const data: Company = await response.json();
 
         this.toggleLoading();
         this.setUpdated(data);
@@ -77,11 +77,11 @@ export const useBookUpdateStore = defineStore("bookUpdate", {
       }
     },
 
-    setRetrieved(retrieved: Book) {
+    setRetrieved(retrieved: Company) {
       this.retrieved = retrieved;
     },
 
-    setUpdated(updated: Book) {
+    setUpdated(updated: Company) {
       this.updated = updated;
     },
 
