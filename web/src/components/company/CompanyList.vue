@@ -94,7 +94,7 @@
               </router-link>
             </td>
             <td class="px-6 py-4 text-sm">
-            {{ item.id }}
+            {{ item['@id'] }}
                         </td>
             <td class="px-6 py-4 text-sm">
             {{ item.name }}
@@ -132,16 +132,16 @@
     <div v-if="view" class="flex justify-center">
       <nav aria-label="Page navigation">
         <ul class="flex list-style-none">
-          <li :class="{ disabled: !view['hydra:previous'] }">
+          <li :class="{ disabled: !view['previous'] }">
             <router-link
               :to="
-                view['hydra:first']
-                  ? view['hydra:first']
+                view['first']
+                  ? view['first']
                   : { name: 'CompanyList' }
               "
               aria-label="First page"
               :class="
-                !view['hydra:previous']
+                !view['previous']
                   ? 'text-gray-500 pointer-events-none'
                   : 'text-gray-800 hover:bg-gray-200'
               "
@@ -151,16 +151,16 @@
             </router-link>
           </li>
 
-          <li :class="{ disabled: !view['hydra:previous'] }">
+          <li :class="{ disabled: !view['previous'] }">
             <router-link
               :to="
-                !view['hydra:previous'] ||
-                view['hydra:previous'] === view['hydra:first']
+                !view['previous'] ||
+                view['previous'] === view['first']
                   ? { name: 'CompanyList' }
-                  : view['hydra:previous']
+                  : view['previous']
               "
               :class="
-                !view['hydra:previous']
+                !view['previous']
                   ? 'text-gray-500 pointer-events-none'
                   : 'text-gray-800 hover:bg-gray-200'
               "
@@ -171,11 +171,11 @@
             </router-link>
           </li>
 
-          <li :class="{ disabled: !view['hydra:next'] }">
+          <li :class="{ disabled: !view['next'] }">
             <router-link
-              :to="view['hydra:next'] ? view['hydra:next'] : '#'"
+              :to="view['next'] ? view['next'] : '#'"
               :class="
-                !view['hydra:next']
+                !view['next']
                   ? 'text-gray-500 pointer-events-none'
                   : 'text-gray-800 hover:bg-gray-200'
               "
@@ -186,11 +186,11 @@
             </router-link>
           </li>
 
-          <li :class="{ disabled: !view['hydra:next'] }">
+          <li :class="{ disabled: !view['next'] }">
             <router-link
-              :to="view['hydra:last'] ? view['hydra:last'] : '#'"
+              :to="view['last'] ? view['last'] : '#'"
               :class="
-                !view['hydra:next']
+                !view['next']
                   ? 'text-gray-500 pointer-events-none'
                   : 'text-gray-800 hover:bg-gray-200'
               "

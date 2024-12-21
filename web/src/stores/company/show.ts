@@ -1,12 +1,12 @@
 import { defineStore } from "pinia";
 import { extractHubURL } from "@/utils/mercure";
 import api from "@/utils/api";
-import type { Book } from "@/types/company";
+import type { Company } from "@/types/company";
 import type { ShowState } from "@/types/stores";
 
-interface State extends ShowState<Book> {}
+interface State extends ShowState<Company> {}
 
-export const useBookShowStore = defineStore("bookShow", {
+export const useCompanyShowStore = defineStore("companyShow", {
   state: (): State => ({
     retrieved: undefined,
     isLoading: false,
@@ -21,7 +21,7 @@ export const useBookShowStore = defineStore("bookShow", {
 
       try {
         const response = await api(id);
-        const data: Book = await response.json();
+        const data: Company = await response.json();
         const hubUrl = extractHubURL(response);
 
         this.toggleLoading();
@@ -43,7 +43,7 @@ export const useBookShowStore = defineStore("bookShow", {
       this.isLoading = !this.isLoading;
     },
 
-    setRetrieved(retrieved: Book) {
+    setRetrieved(retrieved: Company) {
       this.retrieved = retrieved;
     },
 

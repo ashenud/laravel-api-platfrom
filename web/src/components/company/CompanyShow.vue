@@ -2,7 +2,7 @@
   <div class="container mx-auto px-4 max-w-2xl mt-4">
     <div class="flex items-center justify-between">
       <router-link
-        :to="{ name: 'BookList' }"
+        :to="{ name: 'CompanyList' }"
         class="text-blue-600 hover:text-blue-800"
       >
         &lt; Back to list
@@ -11,7 +11,7 @@
       <div>
         <router-link
           v-if="item"
-          :to="{ name: 'BookUpdate', params: { id: item['@id'] } }"
+          :to="{ name: 'CompanyUpdate', params: { id: item['@id'] } }"
           class="px-6 py-2 mr-2 bg-green-600 text-white text-xs rounded shadow-md hover:bg-green-700"
         >
           Edit
@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <h1 class="text-3xl my-4">Show Book {{ item?.["@id"] }}</h1>
+    <h1 class="text-3xl my-4">Show Company {{ item?.["@id"] }}</h1>
 
     <div
       v-if="isLoading"
@@ -61,10 +61,10 @@
               class="text-sm font-medium px-6 py-4 text-left capitalize"
               scope="row"
             >
-              book
+              company
             </th>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
-            {{ item.book }}
+            {{ item.name }}
                         </td>
           </tr>
           <tr class="border-b">
@@ -72,10 +72,10 @@
               class="text-sm font-medium px-6 py-4 text-left capitalize"
               scope="row"
             >
-              condition
+              owner
             </th>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
-            {{ item.condition }}
+            {{ item.owner }}
                         </td>
           </tr>
           <tr class="border-b">
@@ -86,7 +86,7 @@
               title
             </th>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
-            {{ item.title }}
+            {{ item.name }}
                         </td>
           </tr>
           <tr class="border-b">
@@ -97,7 +97,7 @@
               author
             </th>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
-            {{ item.author }}
+            {{ item.name }}
                         </td>
           </tr>
           <tr class="border-b">
@@ -108,7 +108,7 @@
               rating
             </th>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
-            {{ item.rating }}
+            {{ item.name }}
                         </td>
           </tr>
         </tbody>
@@ -121,7 +121,7 @@
 import { onBeforeUnmount } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
-import { useBookShowStore } from "@/stores/company/show";
+import { useCompanyShowStore } from "@/stores/company/show";
 import { useCompanyDeleteStore } from "@/stores/company/delete";
 import { useMercureItem } from "@/composables/mercureItem";
 
@@ -131,16 +131,16 @@ const router = useRouter();
 const companyDeleteStore = useCompanyDeleteStore();
 const { error: deleteError, deleted } = storeToRefs(companyDeleteStore);
 
-const bookShowStore = useBookShowStore();
-const { retrieved: item, isLoading, error } = storeToRefs(bookShowStore);
+const companyShowStore = useCompanyShowStore();
+const { retrieved: item, isLoading, error } = storeToRefs(companyShowStore);
 
 useMercureItem({
-  store: bookShowStore,
+  store: companyShowStore,
   deleteStore: companyDeleteStore,
-  redirectRouteName: "BookList",
+  redirectRouteName: "CompanyList",
 });
 
-await bookShowStore.retrieve(decodeURIComponent(route.params.id as string));
+await companyShowStore.retrieve(decodeURIComponent(route.params.id as string));
 
 async function deleteItem() {
   if (!item?.value) {
@@ -148,17 +148,17 @@ async function deleteItem() {
     return;
   }
 
-  if (window.confirm("Are you sure you want to delete this book?")) {
+  if (window.confirm("Are you sure you want to delete this company?")) {
     await companyDeleteStore.deleteItem(item.value);
 
     if (deleted) {
-      router.push({ name: "BookList" });
+      router.push({ name: "CompanyList" });
     }
   }
 }
 
 onBeforeUnmount(() => {
-  bookShowStore.$reset();
+  companyShowStore.$reset();
 });
 </script>
 
