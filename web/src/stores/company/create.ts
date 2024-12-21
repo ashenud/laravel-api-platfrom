@@ -1,13 +1,13 @@
 import { defineStore } from "pinia";
 import api from "@/utils/api";
-import type { Book } from "@/types/company";
+import type { Company } from "@/types/company";
 import type { CreateState } from "@/types/stores";
 import type { SubmissionErrors } from "@/types/error";
 import { SubmissionError } from "@/utils/error";
 
-interface State extends CreateState<Book> {}
+interface State extends CreateState<Company> {}
 
-export const useBookCreateStore = defineStore("bookCreate", {
+export const useCompanyCreateStore = defineStore("bookCreate", {
   state: (): State => ({
     created: undefined,
     isLoading: false,
@@ -16,16 +16,16 @@ export const useBookCreateStore = defineStore("bookCreate", {
   }),
 
   actions: {
-    async create(payload: Book) {
+    async create(payload: Company) {
       this.setError("");
       this.toggleLoading();
 
       try {
-        const response = await api("admin/books", {
+        const response = await api("api/companies", {
           method: "POST",
           body: JSON.stringify(payload),
         });
-        const data: Book = await response.json();
+        const data: Company = await response.json();
 
         this.toggleLoading();
         this.setCreated(data);
@@ -44,7 +44,7 @@ export const useBookCreateStore = defineStore("bookCreate", {
       }
     },
 
-    setCreated(created: Book) {
+    setCreated(created: Company) {
       this.created = created;
     },
 

@@ -7,5 +7,5 @@
 </template>
 
 <script setup lang="ts">
-import Create from "@/components/book/BookCreate.vue";
+import Create from "@/components/company/CompanyCreate.vue";
 </script>

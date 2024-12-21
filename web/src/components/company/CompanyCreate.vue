@@ -1,13 +1,13 @@
 <template>
   <div class="container mx-auto px-4 max-w-2xl mt-4">
     <router-link
-      :to="{ name: 'BookList' }"
+      :to="{ name: 'CompanyList' }"
       class="text-blue-600 hover:text-blue-800"
     >
       &lt; Back to list
     </router-link>
 
-    <h1 class="text-3xl my-4">Create Book</h1>
+    <h1 class="text-3xl my-4">Create Company</h1>
 
     <div
       v-if="isLoading"
@@ -32,27 +32,27 @@
 import { onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
-import Form from "@/components/book/BookForm.vue";
-import { useBookCreateStore } from "@/stores/company/create";
-import type { Book } from "@/types/company";
+import Form from "@/components/company/CompanyForm.vue";
+import { useCompanyCreateStore } from "@/stores/company/create";
+import type { Company } from "@/types/company";
 
 const router = useRouter();
 
-const bookCreateStore = useBookCreateStore();
-const { isLoading, error, violations } = storeToRefs(bookCreateStore);
+const companyCreateStore = useCompanyCreateStore();
+const { isLoading, error, violations } = storeToRefs(companyCreateStore);
 
-async function create(item: Book) {
-  await bookCreateStore.create(item);
+async function create(item: Company) {
+  await companyCreateStore.create(item);
 
-  if (!bookCreateStore.created) return;
+  if (!companyCreateStore.created) return;
 
   router.push({
-    name: "BookUpdate",
-    params: { id: bookCreateStore.created["@id"] },
+    name: "CompanyUpdate",
+    params: { id: companyCreateStore.created["@id"] },
   });
 }
 
 onBeforeUnmount(() => {
-  bookCreateStore.$reset();
+  companyCreateStore.$reset();
 });
 </script>

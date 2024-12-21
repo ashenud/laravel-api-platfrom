@@ -51,7 +51,7 @@
 import { onBeforeUnmount } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
-import { useBookCreateStore } from "@/stores/company/create";
+import { useCompanyCreateStore } from "@/stores/company/create";
 import { useCompanyDeleteStore } from "@/stores/company/delete";
 import { useBookUpdateStore } from "@/stores/company/update";
 import type { Book } from "@/types/company";
@@ -61,8 +61,8 @@ import { useMercureItem } from "@/composables/mercureItem";
 const route = useRoute();
 const router = useRouter();
 
-const bookCreateStore = useBookCreateStore();
-const { created } = storeToRefs(bookCreateStore);
+const companyCreateStore = useCompanyCreateStore();
+const { created } = storeToRefs(companyCreateStore);
 
 const companyDeleteStore = useCompanyDeleteStore();
 const { error: deleteError, isLoading: deleteLoading } =
@@ -106,7 +106,7 @@ async function deleteItem() {
 
 onBeforeUnmount(() => {
   bookUpdateStore.$reset();
-  bookCreateStore.$reset();
+  companyCreateStore.$reset();
   companyDeleteStore.$reset();
 });
 </script>
