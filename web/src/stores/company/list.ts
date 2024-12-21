@@ -24,14 +24,12 @@ export const useCompanyListStore = defineStore("CompanyList", {
 
       try {
         const path = page ? `api/companies?page=${page}` : "api/companies";
-        console.log(path);
+
         const response = await api(path);
         const data: PagedCollection<Company> = await response.json();
         const hubUrl = extractHubURL(response);
 
         this.toggleLoading();
-
-        console.log(data["member"]);
 
         this.setItems(data["member"]);
         this.setView(data["view"]);
