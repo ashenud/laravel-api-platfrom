@@ -1,25 +1,16 @@
 <template>
   <div class="container mx-auto px-4 max-w-2xl mt-4">
     <div class="flex items-center justify-between">
-      <router-link
-        :to="{ name: 'CompanyList' }"
-        class="text-blue-600 hover:text-blue-800"
-      >
+      <router-link :to="{ name: 'CompanyList' }" class="text-blue-600 hover:text-blue-800">
         &lt; Back to list
       </router-link>
 
       <div>
-        <router-link
-          v-if="item"
-          :to="{ name: 'CompanyUpdate', params: { id: item['@id'] } }"
-          class="px-6 py-2 mr-2 bg-green-600 text-white text-xs rounded shadow-md hover:bg-green-700"
-        >
+        <router-link v-if="item" :to="{ name: 'CompanyUpdate', params: { id: item['@id'] } }"
+          class="px-6 py-2 mr-2 bg-green-600 text-white text-xs rounded shadow-md hover:bg-green-700">
           Edit
         </router-link>
-        <button
-          class="px-6 py-2 bg-red-600 text-white text-xs rounded shadow-md hover:bg-red-700"
-          @click="deleteItem"
-        >
+        <button class="px-6 py-2 bg-red-600 text-white text-xs rounded shadow-md hover:bg-red-700" @click="deleteItem">
           Delete
         </button>
       </div>
@@ -27,19 +18,11 @@
 
     <h1 class="text-3xl my-4">Show Company {{ item?.["@id"] }}</h1>
 
-    <div
-      v-if="isLoading"
-      class="bg-blue-100 rounded py-4 px-4 text-blue-700 text-sm"
-      role="status"
-    >
+    <div v-if="isLoading" class="bg-blue-100 rounded py-4 px-4 text-blue-700 text-sm" role="status">
       Loading...
     </div>
 
-    <div
-      v-if="error || deleteError"
-      class="bg-red-100 rounded py-4 px-4 my-2 text-red-700 text-sm"
-      role="alert"
-    >
+    <div v-if="error || deleteError" class="bg-red-100 rounded py-4 px-4 my-2 text-red-700 text-sm" role="alert">
       {{ error || deleteError }}
     </div>
 
@@ -57,59 +40,28 @@
         </thead>
         <tbody>
           <tr class="border-b">
-            <th
-              class="text-sm font-medium px-6 py-4 text-left capitalize"
-              scope="row"
-            >
-              company
+            <th class="text-sm font-medium px-6 py-4 text-left capitalize" scope="row">
+              id
             </th>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
-            {{ item.name }}
-                        </td>
+              {{ item['@id'] }}
+            </td>
           </tr>
           <tr class="border-b">
-            <th
-              class="text-sm font-medium px-6 py-4 text-left capitalize"
-              scope="row"
-            >
+            <th class="text-sm font-medium px-6 py-4 text-left capitalize" scope="row">
+              name
+            </th>
+            <td class="px-6 py-4 whitespace-nowrap text-sm">
+              {{ item.name }}
+            </td>
+          </tr>
+          <tr class="border-b">
+            <th class="text-sm font-medium px-6 py-4 text-left capitalize" scope="row">
               owner
             </th>
             <td class="px-6 py-4 whitespace-nowrap text-sm">
-            {{ item.owner }}
-                        </td>
-          </tr>
-          <tr class="border-b">
-            <th
-              class="text-sm font-medium px-6 py-4 text-left capitalize"
-              scope="row"
-            >
-              title
-            </th>
-            <td class="px-6 py-4 whitespace-nowrap text-sm">
-            {{ item.name }}
-                        </td>
-          </tr>
-          <tr class="border-b">
-            <th
-              class="text-sm font-medium px-6 py-4 text-left capitalize"
-              scope="row"
-            >
-              author
-            </th>
-            <td class="px-6 py-4 whitespace-nowrap text-sm">
-            {{ item.name }}
-                        </td>
-          </tr>
-          <tr class="border-b">
-            <th
-              class="text-sm font-medium px-6 py-4 text-left capitalize"
-              scope="row"
-            >
-              rating
-            </th>
-            <td class="px-6 py-4 whitespace-nowrap text-sm">
-            {{ item.name }}
-                        </td>
+              {{ item.owner }}
+            </td>
           </tr>
         </tbody>
       </table>
@@ -161,4 +113,3 @@ onBeforeUnmount(() => {
   companyShowStore.$reset();
 });
 </script>
-
