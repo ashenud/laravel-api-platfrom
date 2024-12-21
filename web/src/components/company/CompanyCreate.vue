@@ -37,7 +37,7 @@ async function create(item: Company) {
 
   router.push({
     name: "CompanyUpdate",
-    params: { id: companyCreateStore.created["@id"] },
+    params: { id: companyCreateStore.created.id },
   });
 }
 

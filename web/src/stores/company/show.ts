@@ -20,7 +20,7 @@ export const useCompanyShowStore = defineStore("companyShow", {
       this.toggleLoading();
 
       try {
-        const response = await api(id);
+        const response = await api(`api/companies/${id}`);
         const data: Company = await response.json();
         const hubUrl = extractHubURL(response);
 

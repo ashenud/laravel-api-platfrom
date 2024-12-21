@@ -24,7 +24,7 @@ export const useCompanyUpdateStore = defineStore("companyUpdate", {
       this.toggleLoading();
 
       try {
-        const response = await api(id);
+        const response = await api(`api/companies/${id}`);
         const data: Company = await response.json();
         const hubUrl = extractHubURL(response);
 
@@ -47,13 +47,13 @@ export const useCompanyUpdateStore = defineStore("companyUpdate", {
       this.setError("");
       this.toggleLoading();
 
-      if (!this.retrieved?.["@id"]) {
+      if (!this.retrieved?.id) {
         this.setError("No company found. Please reload");
         return;
       }
 
       try {
-        const response = await api(this.retrieved["@id"], {
+        const response = await api(`api/companies/${this.retrieved.id}`, {
           method: "PATCH",
           headers: new Headers({ "Content-Type": "application/merge-patch+json" }),
           body: JSON.stringify(payload),

@@ -69,6 +69,7 @@ await companyUpdateStore.retrieve(decodeURIComponent(route.params.id as string))
 
 function update(item: Company) {
   companyUpdateStore.update({
+    id: item.id,
     name: item.name,
     owner: item.owner
   });

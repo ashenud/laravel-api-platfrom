@@ -18,13 +18,13 @@ export const useCompanyDeleteStore = defineStore("companyDelete", {
       this.setError("");
       this.toggleLoading();
 
-      if (!item?.["@id"]) {
+      if (!item?.id) {
         this.setError("No company found. Please reload");
         return;
       }
 
       try {
-        await api(item["@id"], { method: "DELETE" });
+        await api(`api/companies/${item.id}`, { method: "DELETE" });
 
         this.toggleLoading();
         this.setDeleted(item);

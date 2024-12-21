@@ -6,7 +6,7 @@
       </router-link>
 
       <div>
-        <router-link v-if="item" :to="{ name: 'CompanyUpdate', params: { id: item['@id'] } }"
+        <router-link v-if="item" :to="{ name: 'CompanyUpdate', params: { id: item.id } }"
           class="px-6 py-2 mr-2 bg-green-600 text-white text-xs rounded shadow-md hover:bg-green-700">
           Edit
         </router-link>

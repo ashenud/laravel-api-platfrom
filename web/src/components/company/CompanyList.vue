@@ -48,9 +48,9 @@
         <tbody>
           <tr v-for="item in items" :key="item['@id']" class="border-b">
             <td class="px-6 py-4 text-sm">
-              <router-link v-if="item" :to="{ name: 'CompanyShow', params: { id: item['@id'] } }"
+              <router-link v-if="item" :to="{ name: 'CompanyShow', params: { id: item.id } }"
                 class="text-blue-600 hover:text-blue-800">
-                {{ item["@id"] }}
+                {{ item.id }}
               </router-link>
             </td>
             <td class="px-6 py-4 text-sm">
@@ -60,13 +60,13 @@
               {{ item.owner }}
             </td>
             <td class="px-6 py-4 text-sm">
-              <router-link :to="{ name: 'CompanyShow', params: { id: item['@id'] } }"
+              <router-link :to="{ name: 'CompanyShow', params: { id: item.id } }"
                 class="px-6 py-2 bg-blue-600 text-white text-xs rounded shadow-md hover:bg-blue-700">
                 Show
               </router-link>
             </td>
             <td class="px-6 py-4 text-sm">
-              <router-link :to="{ name: 'CompanyUpdate', params: { id: item['@id'] } }"
+              <router-link :to="{ name: 'CompanyUpdate', params: { id: item.id } }"
                 class="px-6 py-2 bg-green-600 text-white text-xs rounded shadow-md hover:bg-green-700">
                 Edit
               </router-link>

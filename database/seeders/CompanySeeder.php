@@ -22,6 +22,6 @@ class CompanySeeder extends Seeder
             'owner_id' => 1, // Same admin owns multiple companies
         ]);
 
-        Company::factory(5)->create();
+        Company::factory(1000)->create();
     }
 }
