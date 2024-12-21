@@ -7,7 +7,7 @@ import { SubmissionError } from "@/utils/error";
 
 interface State extends CreateState<Company> {}
 
-export const useCompanyCreateStore = defineStore("bookCreate", {
+export const useCompanyCreateStore = defineStore("companyCreate", {
   state: (): State => ({
     created: undefined,
     isLoading: false,

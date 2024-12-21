@@ -1,11 +1,11 @@
 import { defineStore } from "pinia";
 import api from "@/utils/api";
-import type { Book } from "@/types/company";
+import type { Company } from "@/types/company";
 import type { DeleteState } from "@/types/stores";
 
-interface State extends DeleteState<Book> {}
+interface State extends DeleteState<Company> {}
 
-export const useCompanyDeleteStore = defineStore("bookDelete", {
+export const useCompanyDeleteStore = defineStore("companyDelete", {
   state: (): State => ({
     deleted: undefined,
     mercureDeleted: undefined,
@@ -14,12 +14,12 @@ export const useCompanyDeleteStore = defineStore("bookDelete", {
   }),
 
   actions: {
-    async deleteItem(item: Book) {
+    async deleteItem(item: Company) {
       this.setError("");
       this.toggleLoading();
 
       if (!item?.["@id"]) {
-        this.setError("No book found. Please reload");
+        this.setError("No company found. Please reload");
         return;
       }
 
@@ -42,11 +42,11 @@ export const useCompanyDeleteStore = defineStore("bookDelete", {
       this.isLoading = !this.isLoading;
     },
 
-    setDeleted(deleted: Book) {
+    setDeleted(deleted: Company) {
       this.deleted = deleted;
     },
 
-    setMercureDeleted(mercureDeleted: Book | undefined) {
+    setMercureDeleted(mercureDeleted: Company | undefined) {
       this.mercureDeleted = mercureDeleted;
     },
 
