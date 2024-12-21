@@ -4,7 +4,7 @@ import api from "@/utils/api";
 import type { Company } from "@/types/company";
 import type { ShowState } from "@/types/stores";
 
-interface State extends ShowState<Company> {}
+type State = ShowState<Company>;
 
 export const useCompanyShowStore = defineStore("companyShow", {
   state: (): State => ({

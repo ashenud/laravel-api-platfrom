@@ -6,7 +6,7 @@ import type { View } from "@/types/view";
 import type { ListState } from "@/types/stores";
 import type { PagedCollection } from "@/types/collection";
 
-interface State extends ListState<Company> {}
+type State = ListState<Company>;
 
 export const useCompanyListStore = defineStore("CompanyList", {
   state: (): State => ({

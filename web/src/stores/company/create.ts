@@ -5,7 +5,7 @@ import type { CreateState } from "@/types/stores";
 import type { SubmissionErrors } from "@/types/error";
 import { SubmissionError } from "@/utils/error";
 
-interface State extends CreateState<Company> {}
+type State = CreateState<Company>;
 
 export const useCompanyCreateStore = defineStore("companyCreate", {
   state: (): State => ({

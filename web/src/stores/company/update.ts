@@ -6,7 +6,7 @@ import type { UpdateState } from "@/types/stores";
 import type { SubmissionErrors } from "@/types/error";
 import { SubmissionError } from "@/utils/error";
 
-interface State extends UpdateState<Company> {}
+type State = UpdateState<Company>;
 
 export const useCompanyUpdateStore = defineStore("companyUpdate", {
   state: (): State => ({

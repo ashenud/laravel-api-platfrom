@@ -3,7 +3,7 @@ import api from "@/utils/api";
 import type { Company } from "@/types/company";
 import type { DeleteState } from "@/types/stores";
 
-interface State extends DeleteState<Company> {}
+type State = DeleteState<Company>;
 
 export const useCompanyDeleteStore = defineStore("companyDelete", {
   state: (): State => ({
