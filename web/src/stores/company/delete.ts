@@ -1,11 +1,11 @@
 import { defineStore } from "pinia";
 import api from "@/utils/api";
-import type { Book } from "@/types/book";
+import type { Book } from "@/types/company";
 import type { DeleteState } from "@/types/stores";
 
 interface State extends DeleteState<Book> {}
 
-export const useBookDeleteStore = defineStore("bookDelete", {
+export const useCompanyDeleteStore = defineStore("bookDelete", {
   state: (): State => ({
     deleted: undefined,
     mercureDeleted: undefined,

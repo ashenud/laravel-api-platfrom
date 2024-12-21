@@ -121,22 +121,22 @@
 import { onBeforeUnmount } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
-import { useBookShowStore } from "@/stores/book/show";
-import { useBookDeleteStore } from "@/stores/book/delete";
+import { useBookShowStore } from "@/stores/company/show";
+import { useCompanyDeleteStore } from "@/stores/company/delete";
 import { useMercureItem } from "@/composables/mercureItem";
 
 const route = useRoute();
 const router = useRouter();
 
-const bookDeleteStore = useBookDeleteStore();
-const { error: deleteError, deleted } = storeToRefs(bookDeleteStore);
+const companyDeleteStore = useCompanyDeleteStore();
+const { error: deleteError, deleted } = storeToRefs(companyDeleteStore);
 
 const bookShowStore = useBookShowStore();
 const { retrieved: item, isLoading, error } = storeToRefs(bookShowStore);
 
 useMercureItem({
   store: bookShowStore,
-  deleteStore: bookDeleteStore,
+  deleteStore: companyDeleteStore,
   redirectRouteName: "BookList",
 });
 
@@ -144,12 +144,12 @@ await bookShowStore.retrieve(decodeURIComponent(route.params.id as string));
 
 async function deleteItem() {
   if (!item?.value) {
-    bookDeleteStore.setError("This item does not exist anymore");
+    companyDeleteStore.setError("This item does not exist anymore");
     return;
   }
 
   if (window.confirm("Are you sure you want to delete this book?")) {
-    await bookDeleteStore.deleteItem(item.value);
+    await companyDeleteStore.deleteItem(item.value);
 
     if (deleted) {
       router.push({ name: "BookList" });

@@ -51,10 +51,10 @@
 import { onBeforeUnmount } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
-import { useBookCreateStore } from "@/stores/book/create";
-import { useBookDeleteStore } from "@/stores/book/delete";
-import { useBookUpdateStore } from "@/stores/book/update";
-import type { Book } from "@/types/book";
+import { useBookCreateStore } from "@/stores/company/create";
+import { useCompanyDeleteStore } from "@/stores/company/delete";
+import { useBookUpdateStore } from "@/stores/company/update";
+import type { Book } from "@/types/company";
 import Form from "@/components/book/BookForm.vue";
 import { useMercureItem } from "@/composables/mercureItem";
 
@@ -64,9 +64,9 @@ const router = useRouter();
 const bookCreateStore = useBookCreateStore();
 const { created } = storeToRefs(bookCreateStore);
 
-const bookDeleteStore = useBookDeleteStore();
+const companyDeleteStore = useCompanyDeleteStore();
 const { error: deleteError, isLoading: deleteLoading } =
-  storeToRefs(bookDeleteStore);
+  storeToRefs(companyDeleteStore);
 
 const bookUpdateStore = useBookUpdateStore();
 const {
@@ -79,7 +79,7 @@ const {
 
 useMercureItem({
   store: bookUpdateStore,
-  deleteStore: bookDeleteStore,
+  deleteStore: companyDeleteStore,
   redirectRouteName: "BookList",
 });
 
@@ -96,9 +96,9 @@ async function deleteItem() {
   }
 
   if (window.confirm("Are you sure you want to delete this book?")) {
-    await bookDeleteStore.deleteItem(item.value);
+    await companyDeleteStore.deleteItem(item.value);
 
-    if (bookDeleteStore.deleted) {
+    if (companyDeleteStore.deleted) {
       router.push({ name: "BookList" });
     }
   }
@@ -107,6 +107,6 @@ async function deleteItem() {
 onBeforeUnmount(() => {
   bookUpdateStore.$reset();
   bookCreateStore.$reset();
-  bookDeleteStore.$reset();
+  companyDeleteStore.$reset();
 });
 </script>

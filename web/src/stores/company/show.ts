@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { extractHubURL } from "@/utils/mercure";
 import api from "@/utils/api";
-import type { Book } from "@/types/book";
+import type { Book } from "@/types/company";
 import type { ShowState } from "@/types/stores";
 
 interface State extends ShowState<Book> {}

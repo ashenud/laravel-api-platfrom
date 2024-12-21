@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import api from "@/utils/api";
-import type { Book } from "@/types/book";
+import type { Book } from "@/types/company";
 import type { CreateState } from "@/types/stores";
 import type { SubmissionErrors } from "@/types/error";
 import { SubmissionError } from "@/utils/error";

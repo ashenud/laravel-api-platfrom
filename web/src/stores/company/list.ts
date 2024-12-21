@@ -1,14 +1,14 @@
 import { defineStore } from "pinia";
 import api from "@/utils/api";
 import { extractHubURL } from "@/utils/mercure";
-import type { Book } from "@/types/book";
+import type { Company } from "@/types/company";
 import type { View } from "@/types/view";
 import type { ListState } from "@/types/stores";
 import type { PagedCollection } from "@/types/collection";
 
-interface State extends ListState<Book> {}
+interface State extends ListState<Company> {}
 
-export const useBookListStore = defineStore("bookList", {
+export const useCompanyListStore = defineStore("CompanyList", {
   state: (): State => ({
     items: [],
     isLoading: false,
@@ -25,13 +25,15 @@ export const useBookListStore = defineStore("bookList", {
       try {
         const path = page ? `api/companies?page=${page}` : "api/companies";
         const response = await api(path);
-        const data: PagedCollection<Book> = await response.json();
+        const data: PagedCollection<Company> = await response.json();
         const hubUrl = extractHubURL(response);
 
         this.toggleLoading();
 
-        this.setItems(data["hydra:member"]);
-        this.setView(data["hydra:view"]);
+        console.log(data["member"]);
+
+        this.setItems(data["member"]);
+        this.setView(data["view"]);
 
         if (hubUrl) {
           this.setHubUrl(hubUrl);
@@ -49,7 +51,7 @@ export const useBookListStore = defineStore("bookList", {
       this.isLoading = !this.isLoading;
     },
 
-    setItems(items: Book[]) {
+    setItems(items: Company[]) {
       this.items = items;
     },
 
@@ -65,8 +67,8 @@ export const useBookListStore = defineStore("bookList", {
       this.error = error;
     },
 
-    updateItem(updatedItem: Book) {
-      const item: Book | undefined = this.items.find(
+    updateItem(updatedItem: Company) {
+      const item: Company | undefined = this.items.find(
         (i) => i["@id"] === updatedItem["@id"]
       );
 
@@ -75,7 +77,7 @@ export const useBookListStore = defineStore("bookList", {
       Object.assign(item, updatedItem);
     },
 
-    deleteItem(deletedItem: Book) {
+    deleteItem(deletedItem: Company) {
       this.items = this.items.filter((item) => {
         return item["@id"] !== deletedItem["@id"];
       });

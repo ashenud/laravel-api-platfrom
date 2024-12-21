@@ -134,7 +134,7 @@
 
 <script lang="ts" setup>
 import { toRef, ref, type Ref } from "vue";
-import type { Book } from "@/types/book";
+import type { Book } from "@/types/company";
 import type { SubmissionErrors } from "@/types/error";
 
 const props = defineProps<{

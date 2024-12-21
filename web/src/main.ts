@@ -4,7 +4,7 @@ import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 import App from './App.vue';
-import bookRoutes from '@/router/book';
+import bookRoutes from '@/router/company';
 import { createPinia } from 'pinia';
 
 // Create the router instance

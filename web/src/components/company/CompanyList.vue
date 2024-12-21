@@ -1,10 +1,10 @@
 <template>
   <div class="p-4">
     <div class="flex items-center justify-between">
-      <h1 class="text-3xl my-4">Book List</h1>
+      <h1 class="text-3xl my-4">Company List</h1>
 
       <router-link
-        :to="{ name: 'BookCreate' }"
+        :to="{ name: 'CompanyCreate' }"
         class="px-6 py-2 bg-green-600 text-white text-xs rounded shadow-md hover:bg-green-700"
       >
         Create
@@ -52,7 +52,7 @@
             <th
               class="text-sm font-medium px-6 py-4 text-left capitalize"
             >
-            book
+            company
             </th>
             <th
               class="text-sm font-medium px-6 py-4 text-left capitalize"
@@ -87,7 +87,7 @@
             <td class="px-6 py-4 text-sm">
               <router-link
                 v-if="item"
-                :to="{ name: 'BookShow', params: { id: item['@id'] } }"
+                :to="{ name: 'CompanyShow', params: { id: item['@id'] } }"
                 class="text-blue-600 hover:text-blue-800"
               >
                 {{ item["@id"] }}
@@ -110,7 +110,7 @@
                         </td>
             <td class="px-6 py-4 text-sm">
               <router-link
-                :to="{ name: 'BookShow', params: { id: item['@id'] } }"
+                :to="{ name: 'CompanyShow', params: { id: item['@id'] } }"
                 class="px-6 py-2 bg-blue-600 text-white text-xs rounded shadow-md hover:bg-blue-700"
               >
                 Show
@@ -118,7 +118,7 @@
             </td>
             <td class="px-6 py-4 text-sm">
               <router-link
-                :to="{ name: 'BookUpdate', params: { id: item['@id'] } }"
+                :to="{ name: 'CompanyUpdate', params: { id: item['@id'] } }"
                 class="px-6 py-2 bg-green-600 text-white text-xs rounded shadow-md hover:bg-green-700"
               >
                 Edit
@@ -137,7 +137,7 @@
               :to="
                 view['hydra:first']
                   ? view['hydra:first']
-                  : { name: 'BookList' }
+                  : { name: 'CompanyList' }
               "
               aria-label="First page"
               :class="
@@ -156,7 +156,7 @@
               :to="
                 !view['hydra:previous'] ||
                 view['hydra:previous'] === view['hydra:first']
-                  ? { name: 'BookList' }
+                  ? { name: 'CompanyList' }
                   : view['hydra:previous']
               "
               :class="
@@ -210,31 +210,31 @@
 import { onBeforeUnmount, watch } from "vue";
 import { useRoute } from "vue-router";
 import { storeToRefs } from "pinia";
-import { useBookDeleteStore } from "@/stores/book/delete";
-import { useBookListStore } from "@/stores/book/list";
+import { useCompanyDeleteStore } from "@/stores/company/delete";
+import { useCompanyListStore } from "@/stores/company/list";
 import { useMercureList } from "@/composables/mercureList";
 
 const route = useRoute();
 
-const bookDeleteStore = useBookDeleteStore();
+const companyDeleteStore = useCompanyDeleteStore();
 const { deleted: deletedItem, mercureDeleted: mercureDeletedItem } =
-  storeToRefs(bookDeleteStore);
+  storeToRefs(companyDeleteStore);
 
-const bookListStore = useBookListStore();
-const { items, error, view, isLoading } = storeToRefs(bookListStore);
+const companyListStore = useCompanyListStore();
+const { items, error, view, isLoading } = storeToRefs(companyListStore);
 
-useMercureList({ store: bookListStore, deleteStore: bookDeleteStore });
+useMercureList({ store: companyListStore, deleteStore: companyDeleteStore });
 
 watch(
   () => route.query.page,
   (newPage) => {
     const page = newPage as string;
-    bookListStore.getItems(page);
+    companyListStore.getItems(page);
   },
   { immediate: true }
 );
 
 onBeforeUnmount(() => {
-  bookDeleteStore.$reset();
+  companyDeleteStore.$reset();
 });
 </script>

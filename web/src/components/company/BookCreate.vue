@@ -33,8 +33,8 @@ import { onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import Form from "@/components/book/BookForm.vue";
-import { useBookCreateStore } from "@/stores/book/create";
-import type { Book } from "@/types/book";
+import { useBookCreateStore } from "@/stores/company/create";
+import type { Book } from "@/types/company";
 
 const router = useRouter();
 

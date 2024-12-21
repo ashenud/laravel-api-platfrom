@@ -7,5 +7,5 @@
 </template>
 
 <script setup lang="ts">
-import List from "@/components/book/BookList.vue";
+import List from "@/components/company/CompanyList.vue";
 </script>
